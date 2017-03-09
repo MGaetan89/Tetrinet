@@ -1,4 +1,6 @@
+apply plugin: 'jacoco'
 apply plugin: 'com.android.application'
+apply plugin: 'com.github.kt3k.coveralls'
 apply plugin: 'kotlin-android'
 
 android {
@@ -16,6 +18,10 @@ android {
     }
 
     buildTypes {
+        debug {
+            testCoverageEnabled true
+        }
+
         release {
             minifyEnabled false
         }
@@ -31,6 +37,12 @@ android {
         unitTests {
             returnDefaultValues = true
         }
+    }
+}
+
+tasks.withType(Test) {
+    testLogging {
+        exceptionFormat 'full'
     }
 }
 

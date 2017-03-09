@@ -1,0 +1,55 @@
+language: android
+
+sudo: false
+
+jdk:
+  - oraclejdk8
+
+android:
+  components:
+    - android-25
+    - build-tools-25.0.2
+    - extra-android-m2repository
+    - extra-google-m2repository
+    - platform-tools
+    - tools
+
+env:
+  matrix:
+    - ANDROID_TARGET=android-14   ANDROID_ABI=armeabi-v7a
+    - ANDROID_TARGET=android-15   ANDROID_ABI=armeabi-v7a
+    - ANDROID_TARGET=android-16   ANDROID_ABI=armeabi-v7a
+    - ANDROID_TARGET=android-17   ANDROID_ABI=armeabi-v7a
+    - ANDROID_TARGET=android-18   ANDROID_ABI=armeabi-v7a
+    - ANDROID_TARGET=android-19   ANDROID_ABI=armeabi-v7a
+    - ANDROID_TARGET=android-21   ANDROID_ABI=armeabi-v7a
+    - ANDROID_TARGET=android-22
+    - ANDROID_TARGET=android-23
+    - ANDROID_TARGET=android-24
+    - ANDROID_TARGET=android-25
+
+before_cache:
+  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+
+before_install:
+  - echo y | android update sdk --all --no-ui --force --filter android-25
+  - echo y | android update sdk --all --no-ui --force --filter build-tools-25.0.2
+
+before_script:
+  - ./travis/prepare_emulator.sh
+
+script:
+  - ./gradlew clean
+  - ./gradlew testDebug
+  - if [[ "$ANDROID_ABI" ]]; then ./gradlew connectedCheck; fi
+
+after_success:
+  - ./gradlew jacocoTestReport coveralls
+
+after_failure:
+  - if [[ "$ANDROID_ABI" ]]; then adb logcat -d; fi
+
+cache:
+  directories:
+    - $HOME/.gradle/
+    - $HOME/.m2/

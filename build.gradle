@@ -7,7 +7,9 @@ buildscript {
         buildToolsVersion = '25.0.2'
         compileSdkVersion = 25
         constraintLayoutVersion = '1.0.2'
+        coverallsGradlePlugin = '2.8.1'
         espressoVersion = '2.2.2'
+        jacocoVersion = '0.7.9'
         jUnitVersion = '4.12'
         kotlinVersion = '1.1.0'
         minSdkVersion = 14
@@ -23,7 +25,9 @@ buildscript {
 
     dependencies {
         classpath "com.android.tools.build:gradle:$androidGradlePlugin"
+        classpath "org.jacoco:org.jacoco.core:$jacocoVersion"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath "org.kt3k.gradle.plugin:coveralls-gradle-plugin:$coverallsGradlePlugin"
     }
 }
 
