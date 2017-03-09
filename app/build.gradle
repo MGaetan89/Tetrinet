@@ -1,0 +1,58 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
+
+    defaultConfig {
+        applicationId 'io.tetrinet'
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.compileSdkVersion
+        versionCode 1
+        versionName '1.0'
+        resConfigs rootProject.supportedLanguages
+        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+
+    sourceSets {
+        androidTest.java.srcDirs = ['src/androidTest/kotlin']
+        main.java.srcDirs = ['src/main/kotlin']
+        test.java.srcDirs = ['src/test/kotlin']
+    }
+
+    testOptions {
+        unitTests {
+            returnDefaultValues = true
+        }
+    }
+}
+
+dependencies {
+    compile "com.android.support:support-compat:$supportLibraryVersion"
+    compile "com.android.support.constraint:constraint-layout:$constraintLayoutVersion"
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+
+    testCompile("com.squareup.assertj:assertj-android:$assertJAndroidVersion") {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    testCompile "junit:junit:$jUnitVersion"
+
+    androidTestCompile("com.android.support.test:runner:$testSupportLibraryVersion") {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestCompile("com.android.support.test.espresso:espresso-core:$espressoVersion") {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestCompile("com.squareup.assertj:assertj-android:$assertJAndroidVersion") {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestCompile "junit:junit:$jUnitVersion"
+    androidTestCompile "org.mockito:mockito-android:$mockitoVersion"
+}

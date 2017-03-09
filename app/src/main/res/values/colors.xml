@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="grid_even">#EEEEEE</color>
+    <color name="grid_odd">#E0E0E0</color>
+    <color name="tetrimino_i">#00BCD4</color>
+    <color name="tetrimino_j">#2196F3</color>
+    <color name="tetrimino_l">#FF9800</color>
+    <color name="tetrimino_o">#FFEB3B</color>
+    <color name="tetrimino_s">#CDDC39</color>
+    <color name="tetrimino_t">#9C27B0</color>
+    <color name="tetrimino_z">#F44336</color>
+</resources>
